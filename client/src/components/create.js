@@ -29,7 +29,7 @@ export default function Create() {
     const newPerson = { ...form };
     if (newPerson.password === newPerson.passwordAgain) {
       axios
-        .post("http://localhost:5050/record/user", {
+        .post("http://localhost:5050/signup", {
           name: newPerson.name,
           email: newPerson.email,
           password: newPerson.password,
