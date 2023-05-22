@@ -1,5 +1,5 @@
-# FitTrack
-A MERN-stack fitness tracker app.
+# Ches app 
+A MERN-stack chess app 
 
 ## Table of Contents
 
