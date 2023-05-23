@@ -11,7 +11,7 @@ export const signup = async (req, res) => {
       password: password,
     });
     const createdUser = await users.save();
-    res.status(200).json({ users: users, message: "Ronaldo moment" });
+    res.status(200).json({ users: users, message: "test" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
