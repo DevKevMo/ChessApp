@@ -33,6 +33,7 @@ export default function Create() {
           name: newPerson.name,
           email: newPerson.email,
           password: newPerson.password,
+          confirmPassword: newPerson.passwordAgain,
         })
         .then((res) => navigate("/"))
         .catch((err) => {
