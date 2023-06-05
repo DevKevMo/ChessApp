@@ -1,13 +1,22 @@
 import express from "express";
-const app = express();
 import cors from "cors";
+import session from "express-session";
 import dotenv from "dotenv";
 dotenv.config();
+const app = express();
 const port = process.env.PORT || 5050;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: false,
+    // Additional session options
+  })
+);
 
 // Routes
 import recordsRoutes from "./routes/user.mjs";

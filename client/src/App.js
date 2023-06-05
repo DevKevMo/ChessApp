@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Create from "./components/create.js";
-import Cookies from "js-cookie"
+import Login from "./components/login.js";
+import ToDo from "./components/todo.js";
+import axios from "axios";
 
 const App = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
   useEffect(() => {
-    const sessionCookie = Cookies.get("sessionToken");
-    if (sessionCookie) {
-        //axios
-        //success? setUser(returned user from API request)
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://localhost:5050/valid", {
+          token,
+        })
+        .then((res) => {})
+        .catch((err) => {});
     }
   }, []);
 
@@ -18,8 +24,14 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={user ? <div>Moin, {user.name}</div> : <div>Wer das</div>} />
+        <Route
+          exact
+          path="/"
+          element={user ? <div>Moin, {user.name}</div> : <div>Wer das</div>}
+        />
         <Route path="/create" element={<Create />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/todo" element={<ToDo />} />
       </Routes>
     </div>
   );

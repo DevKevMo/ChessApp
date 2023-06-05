@@ -35,7 +35,11 @@ export default function Create() {
           password: newPerson.password,
           confirmPassword: newPerson.passwordAgain,
         })
-        .then((res) => navigate("/"))
+        .then((res) => {
+          debugger;
+          localStorage.setItem("token", res.data.token);
+          navigate("/");
+        })
         .catch((err) => {
           console.log(err.message);
           setForm({ name: "", email: "", password: "", passwordAgain: "" });

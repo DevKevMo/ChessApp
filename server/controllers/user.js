@@ -27,8 +27,8 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ email: result.email, id: result._id }, SECRET, {
       expiresIn: "1h",
     });
-
-    res.status(200).json({ result, token });
+    res.cookie("token", token, { httpOnly: true });
+    res.status(201).json({ message: "user was created", token });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -37,14 +37,23 @@ export const signup = async (req, res) => {
 export const signin = async (req, res) => {
   try {
     await connectMongoDB();
-    const { name, email, password } = req.body;
-    const users = new User({
-      name: name,
-      email: email,
-      password: password,
-    });
-    const createdUser = await users.save();
-    res.status(200).json({ users: users, message: "user was created" });
+    const { email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      res.status(404).json({ error: "user does not exist" });
+    }
+    if (existingUser.password === hashedPassword) {
+      const token = jwt.sign(
+        { email: existingUser.email, id: existingUser._id },
+        SECRET,
+        { expiresIn: "1h" }
+      );
+      res.cookie("token", token, { httpOnly: true });
+    } else {
+      res.status(400).json({ error: "password is wrong" });
+    }
+    res.status(200).json({ message: "user was found", token });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
