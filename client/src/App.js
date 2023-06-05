@@ -12,7 +12,7 @@ const App = () => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("http://localhost:5050/valid", {
+        .get("http://localhost:5050/getUser", {
           token,
         })
         .then((res) => {})

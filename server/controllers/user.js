@@ -75,6 +75,16 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
+export const getUserData = async (req, res) => {
+  try {
+    res
+      .status(200)
+      .json({ message: "test if function 'getUserData'", reguest: req });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
 export const resetPassword = async (req, res) => {
   try {
     await connectMongoDB();
