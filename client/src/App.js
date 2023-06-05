@@ -8,6 +8,7 @@ import axios from "axios";
 
 const App = () => {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -16,7 +17,7 @@ const App = () => {
           token: token,
         })
         .then((res) => {
-          debugger;
+          setUser(res.data.userData.email);
         })
         .catch((err) => {});
     }
@@ -29,7 +30,7 @@ const App = () => {
         <Route
           exact
           path="/"
-          element={user ? <div>Moin, {user.name}</div> : <div>Wer das</div>}
+          element={user ? <div>Moin, {user}</div> : <div>Wer das</div>}
         />
         <Route path="/create" element={<Create />} />
         <Route path="/login" element={<Login />} />

@@ -86,7 +86,7 @@ export default function Create() {
           <input
             type="submit"
             disabled={!isFormValid}
-            value="Create User"
+            value="login"
             style={inputStyle}
             className="btn btn-primary"
           />

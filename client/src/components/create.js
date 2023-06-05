@@ -36,7 +36,6 @@ export default function Create() {
           confirmPassword: newPerson.passwordAgain,
         })
         .then((res) => {
-          debugger;
           localStorage.setItem("token", res.data.token);
           navigate("/");
         })
@@ -48,6 +47,24 @@ export default function Create() {
       alert("password is not the same");
     }
   }
+
+  const inputStyle = {
+    display: "block",
+    padding: "1.4rem 0.75rem",
+    width: "100%",
+    fontSize: "0.8rem",
+    lineHeight: 1.25,
+    color: "#55595c",
+    backgroundColor: "#fff",
+    backgroundImage: "none",
+    backgroundClip: "padding-box",
+    borderTop: "0",
+    borderRight: "0",
+    borderBottom: "1px solid #eee",
+    borderLeft: "0",
+    borderRadius: "3px",
+    transition: "all 0.25s cubic-bezier(0.4, 0, 1, 1)",
+  };
 
   // This following section will display the form that takes the input from the user.
   return (
@@ -99,6 +116,7 @@ export default function Create() {
             type="submit"
             disabled={!isFormValid}
             value="Create User"
+            style={inputStyle}
             className="btn btn-primary"
           />
         </div>
