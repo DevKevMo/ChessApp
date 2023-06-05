@@ -38,22 +38,21 @@ export const signin = async (req, res) => {
   try {
     await connectMongoDB();
     const { email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 12);
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-      res.status(404).json({ error: "user does not exist" });
+      return res.status(404).json({ error: "user does not exist" });
     }
-    if (existingUser.password === hashedPassword) {
+    if (await bcrypt.compare(password, existingUser.password)) {
       const token = jwt.sign(
         { email: existingUser.email, id: existingUser._id },
         SECRET,
         { expiresIn: "1h" }
       );
       res.cookie("token", token, { httpOnly: true });
+      res.status(200).json({ message: "user was found", sessionToken: token });
     } else {
-      res.status(400).json({ error: "password is wrong" });
+      return res.status(400).json({ error: "password is wrong" });
     }
-    res.status(200).json({ message: "user was found", token });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -75,16 +74,6 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
-export const getUserData = async (req, res) => {
-  try {
-    res
-      .status(200)
-      .json({ message: "test if function 'getUserData'", reguest: req });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
 export const resetPassword = async (req, res) => {
   try {
     await connectMongoDB();
@@ -96,6 +85,16 @@ export const resetPassword = async (req, res) => {
     });
     const createdUser = await users.save();
     res.status(200).json({ users: users, message: "user was created" });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const getUserData = async (req, res) => {
+  try {
+    return res
+      .status(200)
+      .json({ message: "userData was send", userData: req.user });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

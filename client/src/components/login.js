@@ -24,14 +24,13 @@ export default function Create() {
 
     // When a post request is sent to the create url, we'll add a new record to the database.
     const userData = { ...form };
-    debugger;
     axios
-      .get("http://localhost:5050/signin", {
+      .post("http://localhost:5050/signin", {
         email: userData.email,
         password: userData.password,
       })
       .then((res) => {
-        debugger;
+        localStorage.setItem("token", res.data.sessionToken);
         navigate("/");
       })
       .catch((err) => {

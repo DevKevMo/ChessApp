@@ -12,10 +12,12 @@ const App = () => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("http://localhost:5050/getUser", {
-          token,
+        .post("http://localhost:5050/userData", {
+          token: token,
         })
-        .then((res) => {})
+        .then((res) => {
+          debugger;
+        })
         .catch((err) => {});
     }
   }, []);
