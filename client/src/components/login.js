@@ -25,16 +25,37 @@ export default function Create() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const userData = { ...form };
     axios
-      .get("http://localhost:5050/record/user", {
+      .post("http://localhost:5050/signin", {
         email: userData.email,
         password: userData.password,
       })
-      .then((res) => navigate("/"))
+      .then((res) => {
+        localStorage.setItem("token", res.data.sessionToken);
+        navigate("/");
+      })
       .catch((err) => {
         console.log(err.message);
         setForm({ email: "", password: "" });
       });
   }
+
+  const inputStyle = {
+    display: "block",
+    padding: "1.4rem 0.75rem",
+    width: "100%",
+    fontSize: "0.8rem",
+    lineHeight: 1.25,
+    color: "#55595c",
+    backgroundColor: "#fff",
+    backgroundImage: "none",
+    backgroundClip: "padding-box",
+    borderTop: "0",
+    borderRight: "0",
+    borderBottom: "1px solid #eee",
+    borderLeft: "0",
+    borderRadius: "3px",
+    transition: "all 0.25s cubic-bezier(0.4, 0, 1, 1)",
+  };
 
   // This following section will display the form that takes the input from the user.
   return (
@@ -66,6 +87,7 @@ export default function Create() {
             type="submit"
             disabled={!isFormValid}
             value="Create User"
+            style={inputStyle}
             className="btn btn-primary"
           />
         </div>

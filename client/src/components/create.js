@@ -33,8 +33,13 @@ export default function Create() {
           name: newPerson.name,
           email: newPerson.email,
           password: newPerson.password,
+          confirmPassword: newPerson.passwordAgain,
         })
-        .then((res) => navigate("/"))
+        .then((res) => {
+          debugger;
+          localStorage.setItem("token", res.data.token);
+          navigate("/");
+        })
         .catch((err) => {
           console.log(err.message);
           setForm({ name: "", email: "", password: "", passwordAgain: "" });
