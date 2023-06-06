@@ -9,7 +9,7 @@ export const create = async (req, res) => {
     const existingTodo = await Todo.findOne({ title: title, userId: userid });
     if (existingTodo) {
       return res.status(400).json({
-        message: "you already have a todo with that title",
+        error: "you already have a todo with that title",
       });
     }
     const result = await Todo.create({

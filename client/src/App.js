@@ -5,6 +5,7 @@ import Create from "./components/user/create.js";
 import Login from "./components/user/login.js";
 import ToDo from "./components/todo/todo.js";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -18,8 +19,11 @@ const App = () => {
         })
         .then((res) => {
           setUser(res.data.userData.email);
+          toast.success(res.data.message);
         })
-        .catch((err) => {});
+        .catch((err) => {
+          toast.error(err.message);
+        });
     }
   }, []);
 
@@ -36,6 +40,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/todo" element={<ToDo />} />
       </Routes>
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 };

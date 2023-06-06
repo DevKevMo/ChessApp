@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const TodoForm = ({ onTodoAdded }) => {
   const [form, setForm] = useState({
@@ -26,11 +27,12 @@ const TodoForm = ({ onTodoAdded }) => {
         ...form,
       })
       .then((res) => {
+        toast.success(res.data.message);
         onTodoAdded(res.data.todo);
         setForm({ text: "", title: "" });
       })
       .catch((err) => {
-        console.log(err.message);
+        toast.error(JSON.parse(err.request.response).error);
       });
   };
 
