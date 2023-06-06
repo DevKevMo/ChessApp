@@ -19,8 +19,10 @@ app.use(
 );
 
 // Routes
-import recordsRoutes from "./routes/user.mjs";
-app.use(recordsRoutes);
+import userRoutes from "./routes/user.mjs";
+import todoRoutes from "./routes/todo.mjs";
+app.use(userRoutes);
+app.use(todoRoutes);
 
 // Start the server
 import { connectMongoDB } from "./db/conn.mjs";

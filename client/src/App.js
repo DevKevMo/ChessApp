@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/navbar";
-import Create from "./components/create.js";
-import Login from "./components/login.js";
-import ToDo from "./components/todo.js";
+import Navbar from "./components/layout/navbar";
+import Create from "./components/user/create.js";
+import Login from "./components/user/login.js";
+import ToDo from "./components/todo/todo.js";
 import axios from "axios";
 
 const App = () => {

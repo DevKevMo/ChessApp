@@ -92,6 +92,7 @@ export const resetPassword = async (req, res) => {
 
 export const getUserData = async (req, res) => {
   try {
+    await connectMongoDB();
     return res
       .status(200)
       .json({ message: "userData was send", userData: req.user });

@@ -1,7 +1,5 @@
 import { Router } from "express";
 const recordRoutes = Router();
-import { connectMongoDB } from "../db/conn.mjs";
-import User from "../models/user.js";
 import { auth } from "../middleware/auth.js"; // Import the authMiddleware
 import {
   signup,

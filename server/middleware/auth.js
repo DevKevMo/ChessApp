@@ -16,7 +16,6 @@ export const auth = (req, res, next) => {
   try {
     // Verify the token using the secret key
     const decoded = jwt.verify(token, SECRET);
-    console.log(decoded);
     // Attach the user data to the request object for future use
     req.user = decoded;
     next();
