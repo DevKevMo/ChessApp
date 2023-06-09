@@ -74,22 +74,15 @@ function TodoItem({ todo, updateTodoList }) {
         <div className={styles.todoDetails}>
           <CheckButton checked={checked} handleCheck={handleCheck} />
           <div className={styles.texts}>
-            <p
-              className={getClasses([
-                styles.todoText,
-                todo.status === "complete" && styles["todoText--completed"],
-              ])}
-            >
-              {todo.title}:
-            </p>
-            <p
+            <div className={styles.todoText}>{todo.title}:</div>
+            <div
               className={getClasses([
                 styles.todoText,
                 todo.status === "complete" && styles["todoText--completed"],
               ])}
             >
               {todo.text}
-            </p>
+            </div>
           </div>
         </div>
         <div className={styles.todoActions}>
