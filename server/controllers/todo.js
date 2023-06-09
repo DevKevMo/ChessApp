@@ -4,7 +4,7 @@ import Todo from "../models/todo.js";
 export const create = async (req, res) => {
   try {
     await connectMongoDB();
-    const { title, text } = req.body;
+    const { title, text, status } = req.body;
     const userid = req.user.id;
     const existingTodo = await Todo.findOne({ title: title, userId: userid });
     if (existingTodo) {
@@ -16,6 +16,7 @@ export const create = async (req, res) => {
       title: title,
       text: text,
       userId: userid,
+      status: status,
     });
     res.status(201).json({
       message: "todo was created",

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import TodoForm from "./todoForm";
-import TodoList from "./todoList";
+import TodoForm from "./todoHead";
+import TodoContent from "./TodoContent";
 import axios from "axios";
 import PageTitle from "../layout/TitlePage";
 import toast from "react-hot-toast";
+import styles from "../../styles/modules/app.module.scss";
 
 export default function TodosPage() {
   const [todos, setTodos] = useState([]);
@@ -33,8 +34,10 @@ export default function TodosPage() {
   return (
     <div>
       <PageTitle>TODO List</PageTitle>
-      <TodoForm onTodoAdded={handleTodoAdded} />
-      <TodoList todos={todos} />
+      <div className={styles.app_wrapper}>
+        <TodoForm onTodoAdded={handleTodoAdded} />
+        <TodoContent todos={todos} />
+      </div>
     </div>
   );
 }

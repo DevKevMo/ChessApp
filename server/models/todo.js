@@ -9,6 +9,10 @@ const todoShema = new mongoose.Schema({
     type: String,
     default: "no text",
   },
+  status: {
+    type: String,
+    default: "incomplete",
+  },
   userId: {
     type: String,
     required: true,
