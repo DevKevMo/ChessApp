@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TodoHead from "./todoHead";
+import TodoHead from "./TodoHead";
 import TodoContent from "./TodoContent";
 import axios from "axios";
 import PageTitle from "../layout/TitlePage";

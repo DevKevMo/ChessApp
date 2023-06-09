@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from "../../styles/modules/nav.module.scss";
 // We import bootstrap to make our application look better.
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -32,22 +32,22 @@ export default function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
+            <li className={styles.navLink}>
               <NavLink className="nav-link" to="/">
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className={styles.navLink}>
               <NavLink className="nav-link" to="/create">
                 Register
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className={styles.navLink}>
               <NavLink className="nav-link" to="/login">
                 Login
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className={styles.navLink}>
               <NavLink className="nav-link" to="/todo">
                 ToDo
               </NavLink>

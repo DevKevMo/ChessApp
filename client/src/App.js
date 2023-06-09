@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/layout/navbar";
-import Create from "./components/user/create.js";
-import Login from "./components/user/login.js";
-import ToDo from "./components/todo/todo.js";
+import Navbar from "./components/layout/Navbar";
+import Create from "./components/user/Create.js";
+import Login from "./components/user/Login.js";
+import ToDo from "./components/todo/App.js";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 

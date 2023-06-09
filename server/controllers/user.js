@@ -28,7 +28,7 @@ export const signup = async (req, res) => {
       expiresIn: "1h",
     });
     res.cookie("token", token, { httpOnly: true });
-    res.status(201).json({ message: "user was created", token });
+    res.status(201).json({ message: "user was created", sessionToken: token });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
