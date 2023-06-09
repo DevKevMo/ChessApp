@@ -27,7 +27,18 @@ export const create = async (req, res) => {
   }
 };
 
-export const remove = async (req, res) => {};
+export const remove = async (req, res) => {
+  try {
+    await connectMongoDB();
+    const { id } = req.body;
+    await Todo.deleteOne({ _id: id });
+    res.status(201).json({
+      message: "todo was removed",
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
 
 export const update = async (req, res) => {};
 

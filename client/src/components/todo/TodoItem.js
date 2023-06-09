@@ -7,6 +7,7 @@ import styles from "../../styles/modules/todoItem.module.scss";
 import { getClasses } from "../../utils/getClasses";
 import CheckButton from "./CheckButton";
 import TodoModal from "./TodoModal";
+import axios from "axios";
 
 const child = {
   hidden: { y: 20, opacity: 0 },
@@ -15,6 +16,8 @@ const child = {
     opacity: 1,
   },
 };
+
+const token = localStorage.getItem("token");
 
 function TodoItem({ todo }) {
   const [checked, setChecked] = useState(false);
@@ -35,6 +38,17 @@ function TodoItem({ todo }) {
 
   const handleDelete = () => {
     //delte function
+    axios
+      .post("http://localhost:5050/todo/remove", {
+        token: token,
+        id: todo._id,
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        toast.error(JSON.parse(err.request.response).error);
+      });
     toast.success("Todo Deleted Successfully");
   };
 
