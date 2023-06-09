@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import TodoForm from "./todoForm";
 import TodoList from "./todoList";
 import axios from "axios";
+import PageTitle from "../layout/TitlePage";
 import toast from "react-hot-toast";
 
 export default function TodosPage() {
   const [todos, setTodos] = useState([]);
   useEffect(() => {
     fetchTodos();
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   const token = localStorage.getItem("token");
@@ -31,7 +32,7 @@ export default function TodosPage() {
 
   return (
     <div>
-      <h1>Todos</h1>
+      <PageTitle>TODO List</PageTitle>
       <TodoForm onTodoAdded={handleTodoAdded} />
       <TodoList todos={todos} />
     </div>

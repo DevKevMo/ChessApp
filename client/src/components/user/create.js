@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import PageTitle from "../layout/TitlePage";
 
 export default function Create() {
   const [form, setForm] = useState({
@@ -69,7 +70,7 @@ export default function Create() {
   // This following section will display the form that takes the input from the user.
   return (
     <div>
-      <h3>Create New User Account</h3>
+      <PageTitle style={{ color: "grey" }}>Create New User Account</PageTitle>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
