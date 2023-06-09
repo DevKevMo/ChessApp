@@ -3,7 +3,7 @@ import Button, { SelectButton } from "./Button";
 import styles from "../../styles/modules/app.module.scss";
 import TodoModal from "./TodoModal";
 
-const TodoForm = ({ onTodoAdded }) => {
+const TodoHead = ({ onTodoAdded }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState("all");
 
@@ -36,4 +36,4 @@ const TodoForm = ({ onTodoAdded }) => {
   );
 };
 
-export default TodoForm;
+export default TodoHead;

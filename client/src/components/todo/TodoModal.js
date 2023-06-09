@@ -27,7 +27,14 @@ const dropIn = {
   },
 };
 
-function TodoModal({ type, modalOpen, setModalOpen, onTodoAdded, todo }) {
+function TodoModal({
+  type,
+  modalOpen,
+  setModalOpen,
+  onTodoAdded,
+  todo,
+  updateTodoList,
+}) {
   const token = localStorage.getItem("token");
 
   const [title, setTitle] = useState("");
@@ -41,6 +48,7 @@ function TodoModal({ type, modalOpen, setModalOpen, onTodoAdded, todo }) {
       setStatus(todo.status);
     } else {
       setTitle("");
+      setText("");
       setStatus("incomplete");
     }
   }, [type, todo, modalOpen]);
@@ -69,9 +77,26 @@ function TodoModal({ type, modalOpen, setModalOpen, onTodoAdded, todo }) {
           });
       }
       if (type === "update") {
-        if (todo.title !== title || todo.status !== status) {
-          //DB update function
-          toast.success("Task Updated successfully");
+        if (
+          todo.title !== title ||
+          todo.status !== status ||
+          todo.text !== text
+        ) {
+          axios
+            .post("http://localhost:5050/todo/update", {
+              token: token,
+              title: title,
+              text: text,
+              status: status,
+              id: todo._id,
+            })
+            .then((res) => {
+              toast.success(res.data.message);
+              updateTodoList();
+            })
+            .catch((err) => {
+              toast.error(JSON.parse(err.request.response).error);
+            });
         } else {
           toast.error("No changes made");
           return;

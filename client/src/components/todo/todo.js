@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TodoForm from "./todoHead";
+import TodoHead from "./todoHead";
 import TodoContent from "./TodoContent";
 import axios from "axios";
 import PageTitle from "../layout/TitlePage";
@@ -35,8 +35,8 @@ export default function TodosPage() {
     <div>
       <PageTitle>TODO List</PageTitle>
       <div className={styles.app_wrapper}>
-        <TodoForm onTodoAdded={handleTodoAdded} />
-        <TodoContent todos={todos} />
+        <TodoHead onTodoAdded={handleTodoAdded} />
+        <TodoContent todos={todos} updateTodoList={fetchTodos} />
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const container = {
   },
 };
 
-const TodoContent = ({ todos }) => {
+const TodoContent = ({ todos, updateTodoList }) => {
   return (
     <motion.div
       className={styles.content__wrapper}
@@ -24,7 +24,11 @@ const TodoContent = ({ todos }) => {
     >
       <AnimatePresence>
         {todos.map((todo) => (
-          <TodoItem key={todo._id} todo={todo}></TodoItem>
+          <TodoItem
+            key={todo._id}
+            todo={todo}
+            updateTodoList={updateTodoList}
+          ></TodoItem>
         ))}
       </AnimatePresence>
     </motion.div>

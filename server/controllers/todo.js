@@ -40,7 +40,19 @@ export const remove = async (req, res) => {
   }
 };
 
-export const update = async (req, res) => {};
+export const update = async (req, res) => {
+  try {
+    await connectMongoDB();
+    const { title, text, status, id } = req.body;
+    await Todo.updateOne(
+      { _id: id },
+      { title: title, text: text, status: status }
+    );
+    res.status(200).json({ message: "todo updated" });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
 export const fetchData = async (req, res) => {
   try {

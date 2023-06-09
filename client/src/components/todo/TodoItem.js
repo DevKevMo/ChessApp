@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+/* import { format } from "date-fns"; TODO: Add date to you todos*/
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import React, { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ const child = {
 
 const token = localStorage.getItem("token");
 
-function TodoItem({ todo }) {
+function TodoItem({ todo, updateTodoList }) {
   const [checked, setChecked] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
 
@@ -44,6 +44,7 @@ function TodoItem({ todo }) {
         id: todo._id,
       })
       .then((res) => {
+        updateTodoList();
         toast.success(res.data.message);
       })
       .catch((err) => {
@@ -106,6 +107,7 @@ function TodoItem({ todo }) {
         modalOpen={updateModalOpen}
         setModalOpen={setUpdateModalOpen}
         todo={todo}
+        updateTodoList={updateTodoList}
       />
     </>
   );
