@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import TodoForm from "./todoForm";
 import TodoList from "./todoList";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export default function TodosPage() {
   const [todos, setTodos] = useState([]);
   useEffect(() => {
     fetchTodos();
+     // eslint-disable-next-line
   }, []);
 
   const token = localStorage.getItem("token");

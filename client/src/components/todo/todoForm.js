@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const TodoForm = ({ onTodoAdded }) => {
   const [form, setForm] = useState({
