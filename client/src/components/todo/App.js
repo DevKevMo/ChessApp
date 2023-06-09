@@ -20,7 +20,7 @@ export default function TodosPage() {
       .post("http://localhost:5050/todo/fetchData", { token: token })
       .then((res) => {
         setTodos(res.data.todos);
-        toast.success(res.data.message);
+        console.log(res.data.message);
       })
       .catch((err) => {
         toast.error(err.error);
@@ -32,7 +32,7 @@ export default function TodosPage() {
   };
 
   return (
-    <div>
+    <div className={styles.content__wrapper}>
       <PageTitle>TODO List</PageTitle>
       <div className={styles.app_wrapper}>
         <TodoHead onTodoAdded={handleTodoAdded} />

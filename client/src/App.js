@@ -19,7 +19,7 @@ const App = () => {
         })
         .then((res) => {
           setUser(res.data.userData.email);
-          toast.success(res.data.message);
+          console.log(res.data.message);
         })
         .catch((err) => {
           toast.error(err.message);

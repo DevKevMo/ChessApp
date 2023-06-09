@@ -32,8 +32,20 @@ function TodoItem({ todo, updateTodoList }) {
   }, [todo.status]);
 
   const handleCheck = () => {
-    setChecked(!checked);
     //updateFunction
+    axios
+      .post("http://localhost:5050/todo/check", {
+        token: token,
+        id: todo._id,
+        checked: checked,
+      })
+      .then((res) => {
+        updateTodoList();
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        toast.error(JSON.parse(err.request.response).error);
+      });
   };
 
   const handleDelete = () => {
@@ -50,7 +62,6 @@ function TodoItem({ todo, updateTodoList }) {
       .catch((err) => {
         toast.error(JSON.parse(err.request.response).error);
       });
-    toast.success("Todo Deleted Successfully");
   };
 
   const handleUpdate = () => {

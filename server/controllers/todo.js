@@ -27,6 +27,26 @@ export const create = async (req, res) => {
   }
 };
 
+export const check = async (req, res) => {
+  try {
+    await connectMongoDB();
+    const { checked, id } = req.body;
+    if (checked) {
+      await Todo.updateOne({ _id: id }, { status: "incomplete" });
+      res.status(200).json({
+        message: "task incompleted",
+      });
+    } else {
+      await Todo.updateOne({ _id: id }, { status: "complete" });
+      res.status(200).json({
+        message: "task completed",
+      });
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
 export const remove = async (req, res) => {
   try {
     await connectMongoDB();
