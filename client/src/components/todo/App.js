@@ -19,7 +19,20 @@ export default function TodosPage() {
     axios
       .post("http://localhost:5050/todo/fetchData", { token: token })
       .then((res) => {
-        setTodos(res.data.todos);
+        const todo = res.data.todos;
+        const filter = document.getElementById("status").value;
+        const todos = todo.filter((task) => {
+          if (filter === "all") {
+            return task; // Return all tasks
+          } else if (filter === "open") {
+            return task.status === "incomplete" ? task : null; // Return open/incomplete tasks
+          } else if (filter === "done") {
+            return task.status === "complete"; // Return done/complete tasks
+          }
+          return false;
+        });
+        setTodos(todos);
+
         console.log(res.data.message);
       })
       .catch((err) => {
@@ -35,7 +48,7 @@ export default function TodosPage() {
     <div className={styles.content__wrapper}>
       <PageTitle>TODO List</PageTitle>
       <div className={styles.app_wrapper}>
-        <TodoHead onTodoAdded={handleTodoAdded} />
+        <TodoHead onTodoAdded={handleTodoAdded} updateTodoList={fetchTodos} />
         <TodoContent todos={todos} updateTodoList={fetchTodos} />
       </div>
     </div>

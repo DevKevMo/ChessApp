@@ -3,13 +3,13 @@ import Button, { SelectButton } from "./Button";
 import styles from "../../styles/modules/app.module.scss";
 import TodoModal from "./TodoModal";
 
-const TodoHead = ({ onTodoAdded }) => {
+const TodoHead = ({ onTodoAdded, updateTodoList }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState("all");
 
   const updateFilter = (e) => {
     setFilterStatus(e.target.value);
-    //Change stuff
+    updateTodoList();
   };
 
   return (
@@ -23,8 +23,8 @@ const TodoHead = ({ onTodoAdded }) => {
         value={filterStatus}
       >
         <option value="all">All</option>
-        <option value="incomplete">Incomplete</option>
-        <option value="complete">Completed</option>
+        <option value="open">Incomplete</option>
+        <option value="done">Completed</option>
       </SelectButton>
       <TodoModal
         type="add"
