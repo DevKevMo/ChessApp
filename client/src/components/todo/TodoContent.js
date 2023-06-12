@@ -14,7 +14,7 @@ const container = {
   },
 };
 
-const TodoContent = ({ todos, updateTodoList }) => {
+const TodoContent = ({ todos, updateTodoList, setFilter, filter }) => {
   return (
     <motion.div
       className={styles.content__wrapper}
@@ -28,6 +28,8 @@ const TodoContent = ({ todos, updateTodoList }) => {
             key={todo._id}
             todo={todo}
             updateTodoList={updateTodoList}
+            setFilter={setFilter}
+            filter={filter}
           ></TodoItem>
         ))}
       </AnimatePresence>

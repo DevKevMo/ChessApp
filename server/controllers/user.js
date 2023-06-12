@@ -48,8 +48,15 @@ export const signin = async (req, res) => {
         SECRET,
         { expiresIn: "1h" }
       );
+
       res.cookie("token", token, { httpOnly: true });
-      res.status(200).json({ message: "user was found", sessionToken: token });
+      res
+        .status(200)
+        .json({
+          message: "user was found",
+          sessionToken: token,
+          user: existingUser,
+        });
     } else {
       return res.status(400).json({ error: "password is wrong" });
     }

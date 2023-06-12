@@ -3,14 +3,8 @@ import Button, { SelectButton } from "./Button";
 import styles from "../../styles/modules/app.module.scss";
 import TodoModal from "./TodoModal";
 
-const TodoHead = ({ onTodoAdded, updateTodoList }) => {
+const TodoHead = ({ onTodoAdded, updateTodoList, setFilter, filter }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [filterStatus, setFilterStatus] = useState("all");
-
-  const updateFilter = (e) => {
-    setFilterStatus(e.target.value);
-    updateTodoList();
-  };
 
   return (
     <div className={styles.appHeader}>
@@ -19,12 +13,12 @@ const TodoHead = ({ onTodoAdded, updateTodoList }) => {
       </Button>
       <SelectButton
         id="status"
-        onChange={(e) => updateFilter(e)}
-        value={filterStatus}
+        onChange={(e) => setFilter(e.target.value)}
+        value={filter}
       >
         <option value="all">All</option>
-        <option value="open">Incomplete</option>
-        <option value="done">Completed</option>
+        <option value="incomplete">Incomplete</option>
+        <option value="complete">Completed</option>
       </SelectButton>
       <TodoModal
         type="add"

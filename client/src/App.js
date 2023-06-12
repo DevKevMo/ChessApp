@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Create from "./components/user/Create.js";
 import Login from "./components/user/Login.js";
-import ToDo from "./components/todo/App.js";
+import ToDo from "./components/todo/Todo.js";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -18,7 +18,7 @@ const App = () => {
           token: token,
         })
         .then((res) => {
-          setUser(res.data.userData.email);
+          setUser(res.data.userData);
           console.log(res.data.message);
         })
         .catch((err) => {
@@ -34,10 +34,10 @@ const App = () => {
         <Route
           exact
           path="/"
-          element={user ? <div>Moin, {user}</div> : <div>Wer das</div>}
+          element={user ? <div>Moin, {user.email}</div> : <div>Wer das</div>}
         />
         <Route path="/create" element={<Create />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/todo" element={<ToDo />} />
       </Routes>
       <Toaster position="bottom-right" reverseOrder={false} />

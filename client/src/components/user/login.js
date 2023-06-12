@@ -5,7 +5,7 @@ import PageTitle from "../layout/TitlePage";
 import styles from "../../styles/modules/user.module.scss";
 import toast from "react-hot-toast";
 
-export default function Create() {
+export default function Login({ setUser }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -34,6 +34,7 @@ export default function Create() {
       })
       .then((res) => {
         localStorage.setItem("token", res.data.sessionToken);
+        setUser(res.data.user);
         toast.success(res.data.message);
         navigate("/");
       })
