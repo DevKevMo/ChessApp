@@ -25,8 +25,7 @@ export default function TodosPage() {
           if (filter === "all") {
             return task;
           } else {
-            const taskValue = task.status === filter ? task : null;
-            return taskValue;
+            return task.status === filter ? task : null;
           }
         });
         setTodos(todos);

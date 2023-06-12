@@ -41,9 +41,9 @@ const App = () => {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/todo" element={<ToDo />} />
       </Routes>
-      <Toaster position="bottom-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
-  );
+  ); 
 };
 
 export default App;

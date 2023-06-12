@@ -39,6 +39,7 @@ function TodoModal({
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [expires, setExpires] = useState("");
   const [status, setStatus] = useState("incomplete");
 
   useEffect(() => {
@@ -46,10 +47,12 @@ function TodoModal({
       setTitle(todo.title);
       setText(todo.text);
       setStatus(todo.status);
+      setExpires(todo.expires);
     } else {
       setTitle("");
       setText("");
       setStatus("incomplete");
+      setExpires("");
     }
   }, [type, todo, modalOpen]);
 
@@ -65,6 +68,7 @@ function TodoModal({
           .post("http://localhost:5050/todo/create", {
             token: token,
             title: title,
+            expires: expires,
             text: text,
             status: status,
           })
@@ -89,6 +93,7 @@ function TodoModal({
               title: title,
               text: text,
               status: status,
+              expires: expires,
               id: todo._id,
             })
             .then((res) => {
@@ -157,6 +162,15 @@ function TodoModal({
                   id="text"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
+                />
+              </label>
+              <label htmlFor="text">
+                Expires
+                <input
+                  type="date"
+                  id="expires"
+                  value={expires}
+                  onChange={(e) => setExpires(e.target.value)}
                 />
               </label>
               <label htmlFor="type">

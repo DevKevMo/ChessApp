@@ -17,6 +17,10 @@ const todoShema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  expires:{
+    type: Date,
+    default: Date.now,
+  }
 });
 
 const Todo = mongoose.model("Todo", todoShema);

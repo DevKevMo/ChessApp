@@ -41,7 +41,7 @@ function TodoItem({ todo, updateTodoList }) {
       })
       .then((res) => {
         updateTodoList();
-        toast.success(res.data.message);
+        toast.success(res.data.message, { icon: "👏" });
       })
       .catch((err) => {
         toast.error(JSON.parse(err.request.response).error);
@@ -62,10 +62,6 @@ function TodoItem({ todo, updateTodoList }) {
       .catch((err) => {
         toast.error(JSON.parse(err.request.response).error);
       });
-  };
-
-  const handleUpdate = () => {
-    setUpdateModalOpen(true);
   };
 
   return (
@@ -97,8 +93,8 @@ function TodoItem({ todo, updateTodoList }) {
           </div>
           <div
             className={styles.icon}
-            onClick={() => handleUpdate()}
-            onKeyDown={() => handleUpdate()}
+            onClick={() => setUpdateModalOpen(true)}
+            onKeyDown={() => setUpdateModalOpen(true)}
             tabIndex={0}
             role="button"
           >

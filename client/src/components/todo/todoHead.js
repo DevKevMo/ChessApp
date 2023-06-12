@@ -27,7 +27,7 @@ const TodoHead = ({
         <option value="incomplete">Incomplete</option>
         <option value="complete">Completed</option>
       </SelectButton>
-      <TodoSearch todos={todos}></TodoSearch>
+      <TodoSearch todos={todos} updateTodo={updateTodoList}></TodoSearch>
       <TodoModal
         type="add"
         modalOpen={modalOpen}

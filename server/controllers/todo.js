@@ -4,7 +4,7 @@ import Todo from "../models/todo.js";
 export const create = async (req, res) => {
   try {
     await connectMongoDB();
-    const { title, text, status } = req.body;
+    const { title, text, status, expires } = req.body;
     const userid = req.user.id;
     const existingTodo = await Todo.findOne({ title: title, userId: userid });
     if (existingTodo) {
@@ -17,6 +17,7 @@ export const create = async (req, res) => {
       text: text,
       userId: userid,
       status: status,
+      expires: expires,
     });
     res.status(201).json({
       message: "todo was created",
@@ -63,10 +64,10 @@ export const remove = async (req, res) => {
 export const update = async (req, res) => {
   try {
     await connectMongoDB();
-    const { title, text, status, id } = req.body;
+    const { title, text, status, id, expires } = req.body;
     await Todo.updateOne(
       { _id: id },
-      { title: title, text: text, status: status }
+      { title: title, text: text, status: status, expires: expires }
     );
     res.status(200).json({ message: "todo updated" });
   } catch (err) {
