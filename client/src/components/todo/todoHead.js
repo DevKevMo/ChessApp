@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import Button, { SelectButton } from "./Button";
+import TodoSearch from "./TodoSearch";
 import styles from "../../styles/modules/app.module.scss";
 import TodoModal from "./TodoModal";
 
-const TodoHead = ({ onTodoAdded, updateTodoList, setFilter, filter }) => {
+const TodoHead = ({
+  onTodoAdded,
+  updateTodoList,
+  setFilter,
+  filter,
+  todos,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -20,6 +27,7 @@ const TodoHead = ({ onTodoAdded, updateTodoList, setFilter, filter }) => {
         <option value="incomplete">Incomplete</option>
         <option value="complete">Completed</option>
       </SelectButton>
+      <TodoSearch todos={todos}></TodoSearch>
       <TodoModal
         type="add"
         modalOpen={modalOpen}

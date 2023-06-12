@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Create from "./components/user/Create.js";
 import Login from "./components/user/Login.js";
+import Home from "./components/user/Home.js";
 import ToDo from "./components/todo/Todo.js";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -34,7 +35,7 @@ const App = () => {
         <Route
           exact
           path="/"
-          element={user ? <div>Moin, {user.email}</div> : <div>Wer das</div>}
+          element={<Home setUser={setUser} user={user} />}
         />
         <Route path="/create" element={<Create />} />
         <Route path="/login" element={<Login setUser={setUser} />} />

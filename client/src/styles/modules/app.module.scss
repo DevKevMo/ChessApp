@@ -8,7 +8,7 @@
 .appHeader {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 .content__wrapper {
   background-color: var(--bg-2);

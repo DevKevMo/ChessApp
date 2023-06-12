@@ -50,13 +50,11 @@ export const signin = async (req, res) => {
       );
 
       res.cookie("token", token, { httpOnly: true });
-      res
-        .status(200)
-        .json({
-          message: "user was found",
-          sessionToken: token,
-          user: existingUser,
-        });
+      res.status(200).json({
+        message: "user was found",
+        sessionToken: token,
+        user: existingUser,
+      });
     } else {
       return res.status(400).json({ error: "password is wrong" });
     }
@@ -100,9 +98,10 @@ export const resetPassword = async (req, res) => {
 export const getUserData = async (req, res) => {
   try {
     await connectMongoDB();
+    const existingUser = await User.findOne({ _id: req.user.id });
     return res
       .status(200)
-      .json({ message: "userData was send", userData: req.user });
+      .json({ message: "userData was send", userData: existingUser });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

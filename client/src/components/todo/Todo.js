@@ -30,7 +30,6 @@ export default function TodosPage() {
           }
         });
         setTodos(todos);
-        console.log(res.data.message);
       })
       .catch((err) => {
         toast.error(err.error);
@@ -50,6 +49,7 @@ export default function TodosPage() {
           updateTodoList={fetchTodos}
           setFilter={setFilter}
           filter={filter}
+          todos={todos}
         />
         <TodoContent todos={todos} updateTodoList={fetchTodos} />
       </div>
