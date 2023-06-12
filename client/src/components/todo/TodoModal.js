@@ -71,6 +71,7 @@ function TodoModal({
           .then((res) => {
             toast.success(res.data.message);
             onTodoAdded(res.data.todo);
+            setModalOpen(false);
           })
           .catch((err) => {
             toast.error(JSON.parse(err.request.response).error);
@@ -93,6 +94,7 @@ function TodoModal({
             .then((res) => {
               toast.success(res.data.message);
               updateTodoList();
+              setModalOpen(false);
             })
             .catch((err) => {
               toast.error(JSON.parse(err.request.response).error);
@@ -102,7 +104,6 @@ function TodoModal({
           return;
         }
       }
-      setModalOpen(false);
     }
   };
 
